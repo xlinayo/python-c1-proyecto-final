@@ -143,30 +143,3 @@ Se requiere una demostración visual, clara y concisa del aplicativo desarrollad
 * **Duración máxima**: 5 minutos.
 * **Contenido**: Debe evidenciar claramente el funcionamiento completo del aplicativo, incluyendo la interacción entre los microservicios.
 * **Funcionamiento**: Mostrar el flujo de trabajo del sistema, desde la inicialización de los servicios hasta la creación de una cita médica, destacando la comunicación RESTful entre los módulos.
-
-## Flow diagram
-
-```mermaid
-flowchart TD
-  A[Inicio: revisar enunciado y estructura] --> B[Definir endpoints + contratos JSON]
-  B --> C[Definir modelos y reglas de negocio]
-  C --> D[Servicio 1: Auth/Admin]
-  D --> D1[App factory + config + DB SQLite]
-  D1 --> D2[JWT: login + protección endpoints]
-  D2 --> D3[CRUD: doctores/pacientes/centros]
-  D3 --> D4[Validación JSON + errores JSON]
-  D4 --> E[Servicio 2: Citas]
-  E --> E1[App factory + DB de citas]
-  E1 --> E2[JWT: validar token/rol]
-  E2 --> E3[REST a Admin: validar doctor/paciente/centro]
-  E3 --> E4[Reglas: evitar solapes / estados / cancelación]
-  E4 --> F[Cliente externo: carga_inicial.py]
-  F --> F1[Leer CSV local]
-  F1 --> F2[Login y obtener token]
-  F2 --> F3[POST centros/doctores/pacientes]
-  F3 --> F4[POST cita + mostrar JSON]
-  F4 --> G[Docker]
-  G --> G1[Dockerfile x2]
-  G1 --> G2[docker-compose + env vars]
-  G2 --> H[Pruebas + documentación + vídeo]
-  H --> I[Entrega]
