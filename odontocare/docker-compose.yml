@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  odonto_admin:
+    build: ./odonto_admin
+    ports:
+      - "5001:5001"
+
+  odonto_citas:
+    build: ./odonto_citas
+    ports:
+      - "5002:5002"
+    depends_on:
+      - odonto_admin
+    environment:
+      - ADMIN_BASE_URL=http://odonto_admin:5001
